@@ -5,7 +5,6 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/iotexproject/iotex-core/db"
-	"github.com/iotexproject/iotex-core/db/batch"
 )
 
 // NamespaceOption creates an option for given namesapce
@@ -40,6 +39,10 @@ type (
 	StateReader interface {
 		Height() (uint64, error)
 		State(hash.Hash160, interface{}, ...StateOption) error
+	}
+
+	// ArchiveStateReader defines an interface to read archive state
+	ArchiveStateReader interface {
 		StateAtHeight(uint64, hash.Hash160, interface{}) error
 	}
 
@@ -53,6 +56,5 @@ type (
 		PutState(hash.Hash160, interface{}, ...StateOption) error
 		DelState(hash.Hash160, ...StateOption) error
 		GetDB() db.KVStore
-		GetCachedBatch() batch.CachedBatch
 	}
 )

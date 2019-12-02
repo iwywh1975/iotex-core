@@ -9,7 +9,6 @@ import (
 	hash "github.com/iotexproject/go-pkgs/hash"
 	protocol "github.com/iotexproject/iotex-core/action/protocol"
 	db "github.com/iotexproject/iotex-core/db"
-	batch "github.com/iotexproject/iotex-core/db/batch"
 	reflect "reflect"
 )
 
@@ -70,8 +69,31 @@ func (mr *MockStateReaderMockRecorder) State(arg0, arg1 interface{}, arg2 ...int
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "State", reflect.TypeOf((*MockStateReader)(nil).State), varargs...)
 }
 
+// MockArchiveStateReader is a mock of ArchiveStateReader interface
+type MockArchiveStateReader struct {
+	ctrl     *gomock.Controller
+	recorder *MockArchiveStateReaderMockRecorder
+}
+
+// MockArchiveStateReaderMockRecorder is the mock recorder for MockArchiveStateReader
+type MockArchiveStateReaderMockRecorder struct {
+	mock *MockArchiveStateReader
+}
+
+// NewMockArchiveStateReader creates a new mock instance
+func NewMockArchiveStateReader(ctrl *gomock.Controller) *MockArchiveStateReader {
+	mock := &MockArchiveStateReader{ctrl: ctrl}
+	mock.recorder = &MockArchiveStateReaderMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use
+func (m *MockArchiveStateReader) EXPECT() *MockArchiveStateReaderMockRecorder {
+	return m.recorder
+}
+
 // StateAtHeight mocks base method
-func (m *MockStateReader) StateAtHeight(arg0 uint64, arg1 hash.Hash160, arg2 interface{}) error {
+func (m *MockArchiveStateReader) StateAtHeight(arg0 uint64, arg1 hash.Hash160, arg2 interface{}) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "StateAtHeight", arg0, arg1, arg2)
 	ret0, _ := ret[0].(error)
@@ -79,9 +101,9 @@ func (m *MockStateReader) StateAtHeight(arg0 uint64, arg1 hash.Hash160, arg2 int
 }
 
 // StateAtHeight indicates an expected call of StateAtHeight
-func (mr *MockStateReaderMockRecorder) StateAtHeight(arg0, arg1, arg2 interface{}) *gomock.Call {
+func (mr *MockArchiveStateReaderMockRecorder) StateAtHeight(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StateAtHeight", reflect.TypeOf((*MockStateReader)(nil).StateAtHeight), arg0, arg1, arg2)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StateAtHeight", reflect.TypeOf((*MockArchiveStateReader)(nil).StateAtHeight), arg0, arg1, arg2)
 }
 
 // MockStateManager is a mock of StateManager interface
@@ -139,20 +161,6 @@ func (mr *MockStateManagerMockRecorder) State(arg0, arg1 interface{}, arg2 ...in
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "State", reflect.TypeOf((*MockStateManager)(nil).State), varargs...)
-}
-
-// StateAtHeight mocks base method
-func (m *MockStateManager) StateAtHeight(arg0 uint64, arg1 hash.Hash160, arg2 interface{}) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "StateAtHeight", arg0, arg1, arg2)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// StateAtHeight indicates an expected call of StateAtHeight
-func (mr *MockStateManagerMockRecorder) StateAtHeight(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StateAtHeight", reflect.TypeOf((*MockStateManager)(nil).StateAtHeight), arg0, arg1, arg2)
 }
 
 // Snapshot mocks base method
@@ -233,18 +241,4 @@ func (m *MockStateManager) GetDB() db.KVStore {
 func (mr *MockStateManagerMockRecorder) GetDB() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDB", reflect.TypeOf((*MockStateManager)(nil).GetDB))
-}
-
-// GetCachedBatch mocks base method
-func (m *MockStateManager) GetCachedBatch() batch.CachedBatch {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetCachedBatch")
-	ret0, _ := ret[0].(batch.CachedBatch)
-	return ret0
-}
-
-// GetCachedBatch indicates an expected call of GetCachedBatch
-func (mr *MockStateManagerMockRecorder) GetCachedBatch() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCachedBatch", reflect.TypeOf((*MockStateManager)(nil).GetCachedBatch))
 }

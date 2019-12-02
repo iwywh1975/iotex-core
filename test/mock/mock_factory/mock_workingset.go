@@ -11,7 +11,6 @@ import (
 	action "github.com/iotexproject/iotex-core/action"
 	protocol "github.com/iotexproject/iotex-core/action/protocol"
 	db "github.com/iotexproject/iotex-core/db"
-	batch "github.com/iotexproject/iotex-core/db/batch"
 	reflect "reflect"
 )
 
@@ -70,20 +69,6 @@ func (mr *MockWorkingSetMockRecorder) State(arg0, arg1 interface{}, arg2 ...inte
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "State", reflect.TypeOf((*MockWorkingSet)(nil).State), varargs...)
-}
-
-// StateAtHeight mocks base method
-func (m *MockWorkingSet) StateAtHeight(arg0 uint64, arg1 hash.Hash160, arg2 interface{}) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "StateAtHeight", arg0, arg1, arg2)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// StateAtHeight indicates an expected call of StateAtHeight
-func (mr *MockWorkingSetMockRecorder) StateAtHeight(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StateAtHeight", reflect.TypeOf((*MockWorkingSet)(nil).StateAtHeight), arg0, arg1, arg2)
 }
 
 // Snapshot mocks base method
@@ -164,20 +149,6 @@ func (m *MockWorkingSet) GetDB() db.KVStore {
 func (mr *MockWorkingSetMockRecorder) GetDB() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDB", reflect.TypeOf((*MockWorkingSet)(nil).GetDB))
-}
-
-// GetCachedBatch mocks base method
-func (m *MockWorkingSet) GetCachedBatch() batch.CachedBatch {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetCachedBatch")
-	ret0, _ := ret[0].(batch.CachedBatch)
-	return ret0
-}
-
-// GetCachedBatch indicates an expected call of GetCachedBatch
-func (mr *MockWorkingSetMockRecorder) GetCachedBatch() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCachedBatch", reflect.TypeOf((*MockWorkingSet)(nil).GetCachedBatch))
 }
 
 // RunAction mocks base method
@@ -280,18 +251,4 @@ func (m *MockWorkingSet) Version() uint64 {
 func (mr *MockWorkingSetMockRecorder) Version() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Version", reflect.TypeOf((*MockWorkingSet)(nil).Version))
-}
-
-// History mocks base method
-func (m *MockWorkingSet) History() bool {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "History")
-	ret0, _ := ret[0].(bool)
-	return ret0
-}
-
-// History indicates an expected call of History
-func (mr *MockWorkingSetMockRecorder) History() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "History", reflect.TypeOf((*MockWorkingSet)(nil).History))
 }
